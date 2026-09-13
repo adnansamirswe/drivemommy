@@ -1,12 +1,19 @@
 FROM node:22-alpine AS deps
 WORKDIR /app
-COPY package.json bun.lock* package-lock.json* ./
+
+# Copy workspace root files
+COPY package.json bun.lock* ./
+
+# Copy web package.json
+COPY apps/web/package.json ./apps/web/package.json
+
 RUN npm install --no-audit --no-fund || true
 
 FROM node:22-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+COPY --from=deps /app/apps/web/node_modules ./apps/web/node_modules
+COPY apps/web .
 ARG NEXT_PUBLIC_API_URL=http://localhost:3000
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 ENV NEXT_TELEMETRY_DISABLED=1
