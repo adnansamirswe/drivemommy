@@ -1,13 +1,14 @@
 FROM oven/bun:1 AS base
 WORKDIR /app
 
+# Copy everything from Docker context (apps/api/) to /app
 COPY . .
 
-# Debug: list what we got
-RUN find . -maxdepth 3 -type f | head -40
+# Install dependencies
+RUN bun install --no-save
 
-RUN cd apps/api && bun install --frozen-lockfile || bun install
-RUN cd apps/api && bunx prisma generate --schema=prisma/schema.prisma
+# Generate Prisma client
+RUN bunx prisma generate --schema=prisma/schema.prisma
 
 EXPOSE ${APP_PORT:-3000}
-CMD ["sh", "-c", "cd apps/api && bunx prisma migrate deploy --schema=prisma/schema.prisma && bun src/index.ts"]
+CMD ["sh", "-c", "bunx prisma migrate deploy --schema=prisma/schema.prisma && bun src/index.ts"]
