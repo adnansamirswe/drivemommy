@@ -6,7 +6,7 @@ RUN npm install --no-audit --no-fund || true
 FROM node:22-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app .
-ARG NEXT_PUBLIC_API_URL=http://localhost:3000
+ARG NEXT_PUBLIC_API_URL=https://drivemommy.bmgsl.com/api
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN cd apps/web && npm run build
