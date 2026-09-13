@@ -195,7 +195,11 @@ export default function LandingPage() {
             <Image src="/logo.png" alt="DriveMommy" width={100} height={24} className="h-5 w-auto opacity-50" />
             <span>MIT. Bring your own Google Cloud project.</span>
           </div>
-          <span className="hidden sm:inline">Next.js · Hono · Postgres</span>
+          <div className="hidden items-center gap-4 sm:flex">
+            <Link href="/privacy" className="transition-colors hover:text-foreground">Privacy</Link>
+            <Link href="/terms" className="transition-colors hover:text-foreground">Terms</Link>
+            <span>Next.js · Hono · Postgres</span>
+          </div>
         </div>
       </footer>
     </div>
