@@ -1,0 +1,13 @@
+{
+  "name": "drivemommy",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev:api": "bun --hot run --cwd apps/api src/index.ts",
+    "dev:web": "bun --cwd apps/web dev",
+    "build": "bun run --cwd apps/api build && bun run --cwd apps/web build",
+    "db:migrate": "bun run --cwd apps/api db:migrate",
+    "db:generate": "bun run --cwd apps/api db:generate"
+  }
+}
