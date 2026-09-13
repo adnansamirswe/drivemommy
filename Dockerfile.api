@@ -1,0 +1,22 @@
+FROM oven/bun:1 AS base
+WORKDIR /app
+
+# Copy workspace root
+COPY package.json bun.lock* ./
+
+# Copy API package.json
+COPY apps/api/package.json ./apps/api/package.json
+
+# Install dependencies
+RUN bun install --frozen-lockfile 2>/dev/null || bun install
+
+# Copy prisma schema and generate
+COPY apps/api/prisma ./apps/api/prisma
+WORKDIR /app/apps/api
+RUN bunx prisma generate --schema=prisma/schema.prisma
+
+# Copy API source
+COPY apps/api .
+
+EXPOSE 3000
+CMD ["sh", "-c", "bunx prisma migrate deploy --schema=prisma/schema.prisma && bun src/index.ts"]

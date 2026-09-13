@@ -4,38 +4,47 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       POSTGRES_DB: drivemommy
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   api:
-    build: ./apps/api
+    build:
+      context: .
+      dockerfile: Dockerfile.api
     restart: unless-stopped
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/drivemommy
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/drivemommy
       APP_PORT: "3000"
-      FRONTEND_URL: https://drivemommy.bmgsl.com
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
       JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:-change-me-32-chars-minimum-secret}
       TOKEN_ENCRYPTION_KEY: ${TOKEN_ENCRYPTION_KEY:-0123456789abcdef0123456789abcdef}
-      GOOGLE_REDIRECT_URI: https://drivemommy.bmgsl.com/api/connected-accounts/google/callback
+      GOOGLE_REDIRECT_URI: ${GOOGLE_REDIRECT_URI:-http://localhost:3000/connected-accounts/google/callback}
     ports:
-      - "3000:3000"
+      - "4000:3000"
 
   web:
     build:
-      context: ./apps/web
+      context: .
+      dockerfile: Dockerfile.web
       args:
-        NEXT_PUBLIC_API_URL: https://drivemommy.bmgsl.com/api
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:4000}
     restart: unless-stopped
     depends_on:
       - api
     environment:
       PORT: "3000"
     ports:
-      - "3001:3000"
+      - "${WEB_PORT:-3000}:3000"
 
 volumes:
   pgdata:
