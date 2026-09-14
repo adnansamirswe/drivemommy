@@ -92,6 +92,11 @@ body {
   background: var(--foreground);
 }
 
+/* Cursor pointer on interactive elements */
+a, button, [role="button"], input[type="submit"], input[type="button"], select, label[for], .cursor-pointer {
+  cursor: pointer;
+}
+
 /* Smooth scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
