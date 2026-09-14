@@ -8,7 +8,7 @@ export const APP_FOLDER_NAME = 'drivemommy'
 const FOLDER_MIME = 'application/vnd.google-apps.folder'
 
 export const GOOGLE_SCOPES = [
-  'https://www.googleapis.com/auth/drive',
+  'https://www.googleapis.com/auth/drive.file',
   'https://www.googleapis.com/auth/userinfo.email',
   'https://www.googleapis.com/auth/userinfo.profile',
 ]

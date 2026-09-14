@@ -25,7 +25,6 @@ export default function FilesPage() {
   const [q, setQ] = useState("");
   const [uploading, setUploading] = useState(false);
   const [syncing, setSyncing] = useState(false);
-  const [syncScope, setSyncScope] = useState<"drivemommy" | "full">("drivemommy");
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -41,7 +40,7 @@ export default function FilesPage() {
     debounce.current = setTimeout(() => setQ(v.trim()), 400);
   }
 
-  async function onSync(scope: "drivemommy" | "full" = syncScope) {
+  async function onSync() {
     setSyncing(true);
     setError(null);
     setNotice(null);
@@ -107,14 +106,6 @@ export default function FilesPage() {
         <div>
           <input ref={fileRef} type="file" className="hidden" onChange={onUploadPicked} />
           <div className="flex items-center gap-2">
-            <select
-              value={syncScope}
-              onChange={(e) => setSyncScope(e.target.value as "drivemommy" | "full")}
-              className="h-9 rounded-md border border-zinc-200 bg-white px-2 text-sm"
-            >
-              <option value="drivemommy">drivemommy folder only</option>
-              <option value="full">Full Drive</option>
-            </select>
             <Button variant="outline" size="sm" disabled={syncing} onClick={() => onSync()}>
               <RefreshCw className={syncing ? "animate-spin" : ""} /> {syncing ? "Syncing…" : "Sync"}
             </Button>
