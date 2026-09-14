@@ -198,7 +198,7 @@ export default function LandingPage() {
           <div className="hidden items-center gap-4 sm:flex">
             <Link href="/privacy" className="transition-colors hover:text-foreground">Privacy</Link>
             <Link href="/terms" className="transition-colors hover:text-foreground">Terms</Link>
-            <span>Next.js · Hono · Postgres</span>
+            <span>Built by <a href="https://samirzn.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground underline underline-offset-2">Samir</a></span>
           </div>
         </div>
       </footer>

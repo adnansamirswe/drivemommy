@@ -125,7 +125,10 @@ export default function TermsPage() {
             <Image src="/logo.png" alt="DriveMommy" width={120} height={28} className="h-6 w-auto opacity-50" />
             <span>MIT License</span>
           </div>
-          <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+          <div className="flex items-center gap-4">
+            <span>Built by <a href="https://samirzn.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors underline underline-offset-2">Samir</a></span>
+            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+          </div>
         </div>
       </footer>
     </div>
