@@ -7,7 +7,7 @@ export default function TermsPage() {
       <header className="sticky top-0 z-40 glass border-b border-border">
         <div className="mx-auto flex h-16 max-w-4xl items-center justify-between px-6">
           <Link href="/" className="flex items-center">
-            <Image src="/logo.png" alt="DriveMommy" width={140} height={32} className="h-8 w-auto" priority />
+            <Image src="/logo.png" alt="DriveMommy" width={170} height={38} className="h-10 w-auto" priority />
           </Link>
           <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
             Back to home
@@ -122,7 +122,7 @@ export default function TermsPage() {
       <footer className="border-t border-border">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-8 text-xs text-muted-foreground">
           <div className="flex items-center gap-3">
-            <Image src="/logo.png" alt="DriveMommy" width={100} height={24} className="h-5 w-auto opacity-50" />
+            <Image src="/logo.png" alt="DriveMommy" width={120} height={28} className="h-6 w-auto opacity-50" />
             <span>MIT License</span>
           </div>
           <Link href="/" className="hover:text-foreground transition-colors">Home</Link>

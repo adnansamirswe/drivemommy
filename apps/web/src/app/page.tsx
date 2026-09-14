@@ -33,7 +33,7 @@ export default function LandingPage() {
       <header className="sticky top-0 z-40 glass border-b border-border">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <Link href="/" className="flex items-center">
-            <Image src="/logo.png" alt="DriveMommy" width={140} height={32} className="h-8 w-auto" priority />
+            <Image src="/logo.png" alt="DriveMommy" width={170} height={38} className="h-10 w-auto" priority />
           </Link>
           <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
             <a href="#features" className="transition-colors hover:text-foreground">Features</a>
@@ -192,7 +192,7 @@ export default function LandingPage() {
       <footer className="border-t border-border">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-8 text-xs text-muted-foreground">
           <div className="flex items-center gap-3">
-            <Image src="/logo.png" alt="DriveMommy" width={100} height={24} className="h-5 w-auto opacity-50" />
+            <Image src="/logo.png" alt="DriveMommy" width={120} height={28} className="h-6 w-auto opacity-50" />
             <span>MIT. Bring your own Google Cloud project.</span>
           </div>
           <div className="hidden items-center gap-4 sm:flex">

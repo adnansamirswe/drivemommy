@@ -46,7 +46,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <aside className="hidden w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar md:flex">
         <div className="flex h-16 items-center gap-2.5 border-b border-sidebar-border px-5">
           <Link href="/" className="flex items-center">
-            <Image src="/logo.png" alt="DriveMommy" width={130} height={28} className="h-7 w-auto" priority />
+            <Image src="/logo.png" alt="DriveMommy" width={160} height={36} className="h-9 w-auto" priority />
           </Link>
         </div>
         <nav className="flex flex-1 flex-col gap-0.5 p-3">
