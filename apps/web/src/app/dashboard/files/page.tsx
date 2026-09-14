@@ -1,12 +1,13 @@
 "use client";
 
 import { useRef, useState } from "react";
-import useSWR, { useSWRConfig } from "swr";
+import { useSWRConfig } from "swr";
 import { Search, RefreshCw, Trash2, UploadCloud } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/lib/auth";
+import { useAuthedSWR } from "@/lib/swr";
 import { API_URL, formatBytes } from "@/lib/api";
 import { getAccessToken } from "@/lib/auth";
 
@@ -31,7 +32,7 @@ export default function FilesPage() {
   const debounce = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const key = `/files?limit=100${q ? `&q=${encodeURIComponent(q)}` : ""}`;
-  const { data, isLoading } = useSWR<{ files: FileRow[] }>(key);
+  const { data, isLoading } = useAuthedSWR<{ files: FileRow[] }>(key);
   const files = data?.files ?? [];
 
   function onSearch(v: string) {

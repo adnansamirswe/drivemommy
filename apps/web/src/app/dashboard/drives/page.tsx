@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import useSWR, { useSWRConfig } from "swr";
+import { useSWRConfig } from "swr";
 import { RefreshCw, Unplug } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/lib/auth";
+import { useAuthedSWR } from "@/lib/swr";
 import { formatBytes } from "@/lib/api";
 
 type Account = {
@@ -29,7 +30,7 @@ export default function DrivesPage() {
   const [busyId, setBusyId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const { data, isLoading } = useSWR<{ accounts: Account[] }>("/connected-accounts");
+  const { data, isLoading } = useAuthedSWR<{ accounts: Account[] }>("/connected-accounts");
   const accounts = data?.accounts ?? [];
 
   async function connect() {
