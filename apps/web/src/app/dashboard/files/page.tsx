@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useSWRConfig } from "swr";
-import { Search, RefreshCw, Trash2, UploadCloud } from "lucide-react";
+import { Search, RefreshCw, Trash2, UploadCloud, X, CheckCircle2, AlertCircle } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,11 +20,19 @@ type FileRow = {
   connectedAccount: { id: string; email: string; provider: string };
 };
 
+type UploadItem = {
+  id: string;
+  file: File;
+  progress: number;
+  status: "uploading" | "done" | "error";
+  error?: string;
+};
+
 export default function FilesPage() {
   const { authedFetch } = useAuth();
   const { mutate } = useSWRConfig();
   const [q, setQ] = useState("");
-  const [uploading, setUploading] = useState(false);
+  const [uploads, setUploads] = useState<UploadItem[]>([]);
   const [syncing, setSyncing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -61,30 +69,52 @@ export default function FilesPage() {
     }
   }
 
-  async function onUploadPicked(e: React.ChangeEvent<HTMLInputElement>) {
+  function onUploadPicked(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    setUploading(true);
     setError(null);
     setNotice(null);
-    try {
-      const form = new FormData();
-      form.append("file", file);
-      const res = await fetch(`${API_URL}/uploads`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${getAccessToken() ?? ""}` },
-        body: form,
-      });
-      const body = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error((body as { message?: string }).message ?? "Upload failed.");
-      setNotice(`Uploaded ${file.name}.`);
-      mutate(key);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Upload failed.");
-    } finally {
-      setUploading(false);
-      if (fileRef.current) fileRef.current.value = "";
-    }
+
+    const id = crypto.randomUUID();
+    const item: UploadItem = { id, file, progress: 0, status: "uploading" };
+    setUploads((prev) => [...prev, item]);
+
+    const form = new FormData();
+    form.append("file", file);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${API_URL}/uploads`);
+    xhr.setRequestHeader("Authorization", `Bearer ${getAccessToken() ?? ""}`);
+
+    xhr.upload.onprogress = (ev) => {
+      if (ev.lengthComputable) {
+        const pct = Math.round((ev.loaded / ev.total) * 100);
+        setUploads((prev) => prev.map((u) => (u.id === id ? { ...u, progress: pct } : u)));
+      }
+    };
+
+    xhr.onload = () => {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        setUploads((prev) => prev.map((u) => (u.id === id ? { ...u, progress: 100, status: "done" } : u)));
+        mutate(key);
+        setTimeout(() => setUploads((prev) => prev.filter((u) => u.id !== id)), 2000);
+      } else {
+        let msg = "Upload failed.";
+        try { msg = JSON.parse(xhr.responseText).message ?? msg; } catch {}
+        setUploads((prev) => prev.map((u) => (u.id === id ? { ...u, status: "error", error: msg } : u)));
+      }
+    };
+
+    xhr.onerror = () => {
+      setUploads((prev) => prev.map((u) => (u.id === id ? { ...u, status: "error", error: "Network error." } : u)));
+    };
+
+    xhr.send(form);
+    if (fileRef.current) fileRef.current.value = "";
+  }
+
+  function dismissUpload(id: string) {
+    setUploads((prev) => prev.filter((u) => u.id !== id));
   }
 
   async function onDelete(id: string, name: string) {
@@ -96,6 +126,8 @@ export default function FilesPage() {
       setError(err instanceof Error ? err.message : "Delete failed.");
     }
   }
+
+  const activeUploads = uploads.filter((u) => u.status === "uploading");
 
   return (
     <div className="space-y-6">
@@ -110,12 +142,51 @@ export default function FilesPage() {
             <Button variant="outline" size="sm" disabled={syncing} onClick={() => onSync()}>
               <RefreshCw className={syncing ? "animate-spin" : ""} /> {syncing ? "Syncing…" : "Sync"}
             </Button>
-            <Button size="sm" disabled={uploading} onClick={() => fileRef.current?.click()}>
-              <UploadCloud /> {uploading ? "Uploading…" : "Upload"}
+            <Button size="sm" disabled={activeUploads.length > 0} onClick={() => fileRef.current?.click()}>
+              <UploadCloud /> {activeUploads.length > 0 ? `Uploading ${activeUploads.length}…` : "Upload"}
             </Button>
           </div>
         </div>
       </div>
+
+      {uploads.length > 0 && (
+        <div className="space-y-2">
+          {uploads.map((u) => (
+            <div key={u.id} className="flex items-center gap-3 rounded-lg border border-zinc-200 bg-white px-4 py-3">
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center justify-between gap-2">
+                  <p className="truncate text-sm font-medium">{u.file.name}</p>
+                  <span className="shrink-0 text-xs text-zinc-500">{formatBytes(String(u.file.size))}</span>
+                </div>
+                {u.status === "uploading" && (
+                  <div className="mt-2">
+                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-100">
+                      <div
+                        className="h-full rounded-full bg-foreground transition-all duration-300"
+                        style={{ width: `${u.progress}%` }}
+                      />
+                    </div>
+                    <p className="mt-1 text-xs text-zinc-500">{u.progress}%</p>
+                  </div>
+                )}
+                {u.status === "done" && (
+                  <div className="mt-1.5 flex items-center gap-1.5 text-xs text-emerald-600">
+                    <CheckCircle2 className="h-3.5 w-3.5" /> Uploaded successfully
+                  </div>
+                )}
+                {u.status === "error" && (
+                  <div className="mt-1.5 flex items-center gap-1.5 text-xs text-red-600">
+                    <AlertCircle className="h-3.5 w-3.5" /> {u.error}
+                  </div>
+                )}
+              </div>
+              <button onClick={() => dismissUpload(u.id)} className="shrink-0 text-zinc-400 hover:text-zinc-600">
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className="relative max-w-sm">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-400" />
