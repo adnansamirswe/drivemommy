@@ -128,6 +128,7 @@ export default function PrivacyPolicyPage() {
           </div>
           <div className="flex items-center gap-4">
             <span>Built by <a href="https://samirzn.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors underline underline-offset-2">Samir</a></span>
+            <a href="https://github.com/adnansamirswe/drivemommy" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
             <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
           </div>
         </div>

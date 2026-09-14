@@ -199,6 +199,7 @@ export default function LandingPage() {
             <Link href="/privacy" className="transition-colors hover:text-foreground">Privacy</Link>
             <Link href="/terms" className="transition-colors hover:text-foreground">Terms</Link>
             <span>Built by <a href="https://samirzn.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground underline underline-offset-2">Samir</a></span>
+            <a href="https://github.com/adnansamirswe/drivemommy" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground">GitHub</a>
           </div>
         </div>
       </footer>
