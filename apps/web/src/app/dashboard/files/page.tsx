@@ -49,7 +49,7 @@ export default function FilesPage() {
       const data = await authedFetch<{ results: { accountId: string; created: number; updated: number; deleted: number }[] }>("/files/sync-google", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ scope }),
+        body: JSON.stringify({ scope: "drivemommy" }),
       });
       const total = data.results.reduce((acc, r) => acc + r.created + r.updated, 0);
       setNotice(`Synced ${data.results.length} drive(s): ${total} file(s) indexed.`);
