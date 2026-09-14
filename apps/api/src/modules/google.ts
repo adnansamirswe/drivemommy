@@ -1,6 +1,7 @@
 import { google } from 'googleapis'
 import type { ConnectedAccount, ProviderConfig } from '@prisma/client'
 import { prisma } from '../config/db.js'
+import { env } from '../config/env.js'
 import { decryptText, encryptText } from '../lib/crypto.js'
 
 export const APP_FOLDER_NAME = 'drivemommy'
@@ -16,7 +17,7 @@ export function createOAuthClient(config: ProviderConfig) {
   return new google.auth.OAuth2(
     decryptText(config.clientIdEncrypted),
     decryptText(config.clientSecretEncrypted),
-    config.redirectUri,
+    env.GOOGLE_REDIRECT_URI || config.redirectUri,
   )
 }
 
