@@ -4,7 +4,7 @@ import { prisma } from '../config/db.js'
 import { env } from '../config/env.js'
 import { decryptText, encryptText } from '../lib/crypto.js'
 
-export const APP_FOLDER_NAME = 'drivemommy'
+export const APP_FOLDER_NAME = 'mergedrive'
 const FOLDER_MIME = 'application/vnd.google-apps.folder'
 
 export const GOOGLE_SCOPES = [
@@ -100,7 +100,7 @@ export type SyncResult = {
   deleted: number
 }
 
-export async function syncGoogleAppFolderFiles(accountId: string, userId: string, scope: 'drivemommy' | 'full' = 'drivemommy'): Promise<SyncResult> {
+export async function syncGoogleAppFolderFiles(accountId: string, userId: string, scope: 'mergedrive' | 'full' = 'mergedrive'): Promise<SyncResult> {
   const account = await prisma.connectedAccount.findFirstOrThrow({ where: { id: accountId, userId, provider: 'google_drive', status: 'connected' } })
   const auth = await getAuthedGoogleClient(account)
   const drive = google.drive({ version: 'v3', auth })
@@ -110,7 +110,7 @@ export async function syncGoogleAppFolderFiles(accountId: string, userId: string
     select: { id: true, providerFolderId: true },
   })
 
-  const q = scope === 'drivemommy'
+  const q = scope === 'mergedrive'
     ? `'${await ensureAppFolder(account)}' in parents and mimeType != '${FOLDER_MIME}' and trashed = false`
     : `mimeType != '${FOLDER_MIME}' and trashed = false`
 

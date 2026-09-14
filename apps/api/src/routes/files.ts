@@ -30,14 +30,16 @@ fileRoutes.post('/sync-google', requireAuth, async (c) => {
   const user = c.get('user') as { id: string }
   const body = z.object({
     connectedAccountId: z.string().min(1).optional(),
-    scope: z.enum(['drivemommy', 'full']).default('drivemommy'),
+    scope: z.enum(['mergedrive', 'drivemommy', 'full']).default('mergedrive'),
   }).parse(await c.req.json().catch(() => ({})))
+  // Legacy clients may still send 'drivemommy'; treat it as 'mergedrive'.
+  const scope = body.scope === 'drivemommy' ? 'mergedrive' : body.scope
   const accounts = await prisma.connectedAccount.findMany({
     where: { userId: user.id, provider: 'google_drive', status: 'connected', ...(body.connectedAccountId ? { id: body.connectedAccountId } : {}) },
     select: { id: true },
   })
   const results = []
-  for (const account of accounts) results.push(await syncGoogleAppFolderFiles(account.id, user.id, body.scope))
+  for (const account of accounts) results.push(await syncGoogleAppFolderFiles(account.id, user.id, scope))
   return c.json({ status: 'ok', results })
 })
 

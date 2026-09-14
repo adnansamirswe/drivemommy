@@ -2,7 +2,7 @@
 set -euo pipefail
 
 echo ""
-echo "  DriveMommy — Setup"
+echo "  MergeDrive — Setup"
 echo "  =================="
 echo ""
 
@@ -19,7 +19,7 @@ if ! docker compose version &> /dev/null; then
 fi
 
 # ── Gather inputs ───────────────────────────────────────
-read -p "Domain (e.g. drivemommy.example.com): " DOMAIN
+read -p "Domain (e.g. mergedrive.example.com): " DOMAIN
 read -p "Port for web UI [3000]: " WEB_PORT
 WEB_PORT=${WEB_PORT:-3000}
 

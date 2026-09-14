@@ -1,4 +1,4 @@
-# DriveMommy
+# MergeDrive
 
 A self-hosted storage gateway that pools multiple Google Drive accounts behind one clean REST API. Connect N drives, route uploads to whichever has space, and let your apps upload, list and download files with scoped API keys.
 
@@ -6,7 +6,7 @@ A self-hosted storage gateway that pools multiple Google Drive accounts behind o
 
 ## Why
 
-Google gives you 15 GB per account. Most projects only use one. DriveMommy lets you treat multiple Drive accounts as a single storage pool — files stream directly to Drive, nothing touches your server disk.
+Google gives you 15 GB per account. Most projects only use one. MergeDrive lets you treat multiple Drive accounts as a single storage pool — files stream directly to Drive, nothing touches your server disk.
 
 ## Features
 
@@ -30,8 +30,8 @@ Google gives you 15 GB per account. Most projects only use one. DriveMommy lets 
 ## Quick start (Docker)
 
 ```bash
-git clone https://github.com/yourname/drivemommy.git
-cd drivemommy
+git clone https://github.com/adnansamirswe/mergedrive.git
+cd mergedrive
 cp .env.example .env
 ```
 
@@ -61,20 +61,20 @@ curl -fsSL https://get.docker.com | sh
 ### 2. Clone and configure
 
 ```bash
-git clone https://github.com/yourname/drivemommy.git
-cd drivemommy
+git clone https://github.com/adnansamirswe/mergedrive.git
+cd mergedrive
 cp .env.example .env
 ```
 
 Edit `.env`:
 
 ```env
-DATABASE_URL=postgresql://postgres:yourpassword@db:5432/drivemommy
+DATABASE_URL=postgresql://postgres:yourpassword@db:5432/mergedrive
 JWT_ACCESS_SECRET=<random-32-chars>
 TOKEN_ENCRYPTION_KEY=<random-32-hex-chars>
-FRONTEND_URL=https://drivemommy.yourdomain.com
-GOOGLE_REDIRECT_URI=https://drivemommy.yourdomain.com/api/connected-accounts/google/callback
-NEXT_PUBLIC_API_URL=https://drivemommy.yourdomain.com/api
+FRONTEND_URL=https://mergedrive.yourdomain.com
+GOOGLE_REDIRECT_URI=https://mergedrive.yourdomain.com/api/connected-accounts/google/callback
+NEXT_PUBLIC_API_URL=https://mergedrive.yourdomain.com/api
 ```
 
 ### 3. Start with Docker Compose
@@ -100,7 +100,7 @@ Point your domain to the VPS, then add a reverse proxy (Nginx, Caddy, or Traefik
 **Caddy** (auto-HTTPS):
 
 ```
-drivemommy.yourdomain.com {
+mergedrive.yourdomain.com {
     handle /api/* {
         reverse_proxy api:3000
     }
@@ -115,10 +115,10 @@ drivemommy.yourdomain.com {
 ```nginx
 server {
     listen 443 ssl;
-    server_name drivemommy.yourdomain.com;
+    server_name mergedrive.yourdomain.com;
 
-    ssl_certificate     /etc/letsencrypt/live/drivemommy.yourdomain.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/drivemommy.yourdomain.com/privkey.pem;
+    ssl_certificate     /etc/letsencrypt/live/mergedrive.yourdomain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/mergedrive.yourdomain.com/privkey.pem;
 
     location /api/ {
         proxy_pass http://127.0.0.1:3000;
@@ -145,8 +145,8 @@ server {
 2. Create an OAuth 2.0 Client ID (Web application)
 3. Add authorized redirect URIs:
    ```
-   https://drivemommy.yourdomain.com/api/auth/google/callback
-   https://drivemommy.yourdomain.com/api/connected-accounts/google/callback
+   https://mergedrive.yourdomain.com/api/auth/google/callback
+   https://mergedrive.yourdomain.com/api/connected-accounts/google/callback
    ```
 4. Open the dashboard, go to **Settings**, and save your Google Client ID and Secret
 
@@ -160,16 +160,16 @@ Create an API key in the dashboard, then:
 
 ```bash
 # Upload a file
-curl -X POST https://drivemommy.yourdomain.com/api/v1/uploads \
+curl -X POST https://mergedrive.yourdomain.com/api/v1/uploads \
   -H "Authorization: Bearer dm_live_..." \
   -F "file=@report.pdf"
 
 # List files
-curl https://drivemommy.yourdomain.com/api/v1/files \
+curl https://mergedrive.yourdomain.com/api/v1/files \
   -H "Authorization: Bearer dm_live_..."
 
 # Get storage quota
-curl https://drivemommy.yourdomain.com/api/v1/storage/summary \
+curl https://mergedrive.yourdomain.com/api/v1/storage/summary \
   -H "Authorization: Bearer dm_live_..."
 ```
 

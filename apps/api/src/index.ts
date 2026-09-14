@@ -15,7 +15,7 @@ const app = new Hono()
 
 app.use('*', cors({ origin: env.FRONTEND_URL, allowMethods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'], allowHeaders: ['Content-Type', 'Authorization'] }))
 
-app.get('/health', (c) => c.json({ status: 'ok', service: 'drivemommy-api' }))
+app.get('/health', (c) => c.json({ status: 'ok', service: 'mergedrive-api' }))
 
 app.route('/auth', authRoutes)
 app.route('/connected-accounts', connectedAccountRoutes)
@@ -37,4 +37,4 @@ app.onError((err, c) => {
 
 const port = env.APP_PORT
 export default { port, fetch: app.fetch }
-console.log(`drivemommy-api listening on :${port}`)
+console.log(`mergedrive-api listening on :${port}`)

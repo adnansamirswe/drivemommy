@@ -49,7 +49,7 @@ function LoginForm() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="w-full max-w-sm">
         <Link href="/" className="mb-8 flex items-center justify-center">
-          <Image src="/logo.png" alt="DriveMommy" width={200} height={44} className="h-11 w-auto" priority />
+          <Image src="/logo.png" alt="MergeDrive" width={200} height={44} className="h-11 w-auto" priority />
         </Link>
 
         <div className="rounded-2xl border border-border bg-card p-8 shadow-sm">

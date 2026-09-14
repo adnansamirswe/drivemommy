@@ -7,7 +7,7 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "DriveMommy — Unified Google Drive storage + API",
+  title: "MergeDrive — Unified Google Drive storage + API",
   description: "Connect multiple Google Drives into one dashboard. Upload, route, and serve files via a clean REST API.",
 };
 

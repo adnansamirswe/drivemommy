@@ -7,7 +7,7 @@ export default function TermsPage() {
       <header className="sticky top-0 z-40 glass border-b border-border">
         <div className="mx-auto flex h-16 max-w-4xl items-center justify-between px-6">
           <Link href="/" className="flex items-center">
-            <Image src="/logo.png" alt="DriveMommy" width={170} height={38} className="h-10 w-auto" priority />
+            <Image src="/logo.png" alt="MergeDrive" width={170} height={38} className="h-10 w-auto" priority />
           </Link>
           <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
             Back to home
@@ -23,7 +23,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-lg font-semibold text-foreground">1. Acceptance of Terms</h2>
             <p>
-              By accessing or using DriveMommy (&quot;the Service&quot;), you agree to be bound by these Terms of Service.
+              By accessing or using MergeDrive (&quot;the Service&quot;), you agree to be bound by these Terms of Service.
               If you do not agree, do not use the Service.
             </p>
           </section>
@@ -31,7 +31,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-lg font-semibold text-foreground">2. Description of Service</h2>
             <p>
-              DriveMommy is an open-source storage gateway that allows you to connect multiple Google Drive accounts,
+              MergeDrive is an open-source storage gateway that allows you to connect multiple Google Drive accounts,
               pool storage, and manage files through a web dashboard and REST API. The Service is provided &quot;as is&quot;
               without warranties of any kind.
             </p>
@@ -62,7 +62,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-lg font-semibold text-foreground">5. Intellectual Property</h2>
             <p>
-              DriveMommy is released under the MIT License. You are free to use, modify, and distribute the software
+              MergeDrive is released under the MIT License. You are free to use, modify, and distribute the software
               in accordance with the license terms. The Service name, logo, and documentation are our intellectual property.
             </p>
           </section>
@@ -92,7 +92,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-lg font-semibold text-foreground">8. Self-Hosted Instances</h2>
             <p>
-              If you self-host DriveMommy, these Terms govern your use of the software. You are responsible for
+              If you self-host MergeDrive, these Terms govern your use of the software. You are responsible for
               your own deployment, data, and compliance with applicable laws. We have no control over or access
               to self-hosted instances.
             </p>
@@ -111,7 +111,7 @@ export default function TermsPage() {
             <h2 className="text-lg font-semibold text-foreground">10. Contact</h2>
             <p>
               For questions about these Terms, open an issue on{" "}
-              <a href="https://github.com/adnansamirswe/drivemommy" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">
+              <a href="https://github.com/adnansamirswe/mergedrive" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">
                 GitHub
               </a>.
             </p>
@@ -122,12 +122,12 @@ export default function TermsPage() {
       <footer className="border-t border-border">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-8 text-xs text-muted-foreground">
           <div className="flex items-center gap-3">
-            <Image src="/logo.png" alt="DriveMommy" width={120} height={28} className="h-6 w-auto opacity-50" />
+            <Image src="/logo.png" alt="MergeDrive" width={120} height={28} className="h-6 w-auto opacity-50" />
             <span>MIT License</span>
           </div>
           <div className="flex items-center gap-4">
             <span>Built by <a href="https://samirzn.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors underline underline-offset-2">Samir</a></span>
-            <a href="https://github.com/adnansamirswe/drivemommy" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
+            <a href="https://github.com/adnansamirswe/mergedrive" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
             <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
           </div>
         </div>

@@ -33,7 +33,7 @@ export default function LandingPage() {
       <header className="sticky top-0 z-40 glass border-b border-border">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <Link href="/" className="flex items-center">
-            <Image src="/logo.png" alt="DriveMommy" width={170} height={38} className="h-10 w-auto" priority />
+            <Image src="/logo.png" alt="MergeDrive" width={170} height={38} className="h-10 w-auto" priority />
           </Link>
           <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
             <a href="#features" className="transition-colors hover:text-foreground">Features</a>
@@ -192,14 +192,14 @@ export default function LandingPage() {
       <footer className="border-t border-border">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-8 text-xs text-muted-foreground">
           <div className="flex items-center gap-3">
-            <Image src="/logo.png" alt="DriveMommy" width={120} height={28} className="h-6 w-auto opacity-50" />
+            <Image src="/logo.png" alt="MergeDrive" width={120} height={28} className="h-6 w-auto opacity-50" />
             <span>MIT. Bring your own Google Cloud project.</span>
           </div>
           <div className="hidden items-center gap-4 sm:flex">
             <Link href="/privacy" className="transition-colors hover:text-foreground">Privacy</Link>
             <Link href="/terms" className="transition-colors hover:text-foreground">Terms</Link>
             <span>Built by <a href="https://samirzn.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground underline underline-offset-2">Samir</a></span>
-            <a href="https://github.com/adnansamirswe/drivemommy" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground">GitHub</a>
+            <a href="https://github.com/adnansamirswe/mergedrive" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-foreground">GitHub</a>
           </div>
         </div>
       </footer>

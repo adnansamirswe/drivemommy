@@ -7,7 +7,7 @@ export default function PrivacyPolicyPage() {
       <header className="sticky top-0 z-40 glass border-b border-border">
         <div className="mx-auto flex h-16 max-w-4xl items-center justify-between px-6">
           <Link href="/" className="flex items-center">
-            <Image src="/logo.png" alt="DriveMommy" width={170} height={38} className="h-10 w-auto" priority />
+            <Image src="/logo.png" alt="MergeDrive" width={170} height={38} className="h-10 w-auto" priority />
           </Link>
           <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
             Back to home
@@ -23,14 +23,14 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-lg font-semibold text-foreground">1. Introduction</h2>
             <p>
-              DriveMommy (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is an open-source, self-hosted storage gateway.
-              This Privacy Policy explains how we handle data when you use DriveMommy, whether hosted by us or self-hosted on your own infrastructure.
+              MergeDrive (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is an open-source, self-hosted storage gateway.
+              This Privacy Policy explains how we handle data when you use MergeDrive, whether hosted by us or self-hosted on your own infrastructure.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-semibold text-foreground">2. Data We Access</h2>
-            <p>When you connect a Google Drive account, DriveMommy accesses:</p>
+            <p>When you connect a Google Drive account, MergeDrive accesses:</p>
             <ul className="mt-2 list-disc pl-5 space-y-1">
               <li>Your Google account email and display name (for identification)</li>
               <li>File metadata (names, sizes, types) within your Drive</li>
@@ -64,7 +64,7 @@ export default function PrivacyPolicyPage() {
 
           <section>
             <h2 className="text-lg font-semibold text-foreground">5. Third-Party Services</h2>
-            <p>DriveMommy integrates with the following third-party services:</p>
+            <p>MergeDrive integrates with the following third-party services:</p>
             <ul className="mt-2 list-disc pl-5 space-y-1">
               <li><strong className="text-foreground">Google Drive API</strong> — to access your Drive files and storage quota. Subject to Google&apos;s <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Privacy Policy</a>.</li>
             </ul>
@@ -93,7 +93,7 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-lg font-semibold text-foreground">8. Self-Hosted Instances</h2>
             <p>
-              If you self-host DriveMommy, this Privacy Policy does not apply to your instance.
+              If you self-host MergeDrive, this Privacy Policy does not apply to your instance.
               You are solely responsible for the data you collect and store. We have no access to
               self-hosted databases, files, or credentials.
             </p>
@@ -103,7 +103,7 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-lg font-semibold text-foreground">9. Changes to This Policy</h2>
             <p>
               We may update this Privacy Policy from time to time. Changes will be posted on this page
-              with an updated revision date. Continued use of DriveMommy after changes constitutes acceptance
+              with an updated revision date. Continued use of MergeDrive after changes constitutes acceptance
               of the updated policy.
             </p>
           </section>
@@ -112,7 +112,7 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-lg font-semibold text-foreground">10. Contact</h2>
             <p>
               If you have questions about this Privacy Policy, open an issue on{" "}
-              <a href="https://github.com/adnansamirswe/drivemommy" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">
+              <a href="https://github.com/adnansamirswe/mergedrive" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">
                 GitHub
               </a>.
             </p>
@@ -123,12 +123,12 @@ export default function PrivacyPolicyPage() {
       <footer className="border-t border-border">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-8 text-xs text-muted-foreground">
           <div className="flex items-center gap-3">
-            <Image src="/logo.png" alt="DriveMommy" width={120} height={28} className="h-6 w-auto opacity-50" />
+            <Image src="/logo.png" alt="MergeDrive" width={120} height={28} className="h-6 w-auto opacity-50" />
             <span>MIT License</span>
           </div>
           <div className="flex items-center gap-4">
             <span>Built by <a href="https://samirzn.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors underline underline-offset-2">Samir</a></span>
-            <a href="https://github.com/adnansamirswe/drivemommy" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
+            <a href="https://github.com/adnansamirswe/mergedrive" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
             <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
           </div>
         </div>

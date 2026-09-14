@@ -57,7 +57,7 @@ export default function FilesPage() {
       const data = await authedFetch<{ results: { accountId: string; created: number; updated: number; deleted: number }[] }>("/files/sync-google", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ scope: "drivemommy" }),
+        body: JSON.stringify({ scope: "mergedrive" }),
       });
       const total = data.results.reduce((acc, r) => acc + r.created + r.updated, 0);
       setNotice(`Synced ${data.results.length} drive(s): ${total} file(s) indexed.`);
@@ -199,7 +199,7 @@ export default function FilesPage() {
       <Card>
         <CardHeader>
           <CardTitle>{isLoading ? "Loading…" : `${files.length} file${files.length === 1 ? "" : "s"}`}</CardTitle>
-          <CardDescription>Newest first. Stored under each Drive&apos;s drivemommy folder.</CardDescription>
+          <CardDescription>Newest first. Stored under each Drive&apos;s mergedrive folder.</CardDescription>
         </CardHeader>
         <CardContent className="p-0">
           {files.length === 0 && !isLoading ? (
